@@ -1,0 +1,142 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/v1/stats/min:
+    get:
+      tags:
+      - method-statistic-controller
+      operationId: getMinWorkTime
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MethodMinTimeDto'
+  /api/v1/stats/max:
+    get:
+      tags:
+      - method-statistic-controller
+      operationId: getMaxWorkTime
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MethodMaxTimeDto'
+  /api/v1/stats/avg:
+    get:
+      tags:
+      - method-statistic-controller
+      operationId: getAverageWorkTime
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MethodAverageTimeDto'
+  /api/v1/stats/:
+    get:
+      tags:
+      - method-statistic-controller
+      operationId: getAllStatisticData
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MethodDataDto'
+  /api/v1/stats/TrackTime:
+    get:
+      tags:
+      - method-statistic-controller
+      operationId: getTrackTime
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MethodDataDto'
+  /api/v1/stats/TrackAsyncTime:
+    get:
+      tags:
+      - method-statistic-controller
+      operationId: getTrackAsyncTime
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MethodDataDto'
+components:
+  schemas:
+    MethodMinTimeDto:
+      type: object
+      properties:
+        methodName:
+          type: string
+        minTime:
+          type: number
+          format: double
+        annotationAboveMethod:
+          type: string
+        className:
+          type: string
+    MethodMaxTimeDto:
+      type: object
+      properties:
+        methodName:
+          type: string
+        maxTime:
+          type: number
+          format: double
+        annotationAboveMethod:
+          type: string
+        className:
+          type: string
+    MethodAverageTimeDto:
+      type: object
+      properties:
+        methodName:
+          type: string
+        averageTime:
+          type: number
+          format: double
+        annotationAboveMethod:
+          type: string
+        className:
+          type: string
+    MethodDataDto:
+      type: object
+      properties:
+        methodName:
+          type: string
+        className:
+          type: string
+        time:
+          type: integer
+          format: int64
+        annotationAboveMethod:
+          type: string
